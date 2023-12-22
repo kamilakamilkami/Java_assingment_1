@@ -17,7 +17,7 @@ public class Main {
                 Point p = new Point(x,y);
                 shape.addPoint(p);
             }
-            System.out.println(shape.calculatePerimetr());
+            System.out.println(shape.calculatePerimeter());
             System.out.println(shape.getLongestSide());
             System.out.println(shape.getAverageSide());
             sc.close();

@@ -4,23 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shape {
-    private List<Point> points;
-    private double perimetr = 0;
-    private double avg_len = 0;
-    private int i = 0;
 
-    Shape(){
+    private List<Point> points;
+
+    public Shape(){
         this.points = new ArrayList<Point>();
     }
 
     public void addPoint(Point point){
         this.points.add(point); 
     }
+
     public double getLongestSide(){
-        if(this.avg_len != 0){
-            return this.avg_len;
-        }
-        double ans = 0;
+        return this.calculations()[0];
+    }
+
+    public double calculatePerimeter(){
+        return this.calculations()[1];
+    }
+
+    public double getAverageSide(){
+        return this.calculatePerimeter()/this.points.size();
+    }
+
+
+    private double[] calculations(){
+        double[] ans = {0,0};
         for(int i=0;i<this.points.size(); ++i){
             double c = 0;
             if(i == this.points.size()-1){
@@ -29,36 +38,12 @@ public class Shape {
             else{
                 c = this.points.get(i).getDistanceToOtherPoint(this.points.get(i+1));
             }
-            if(c > ans){
-                ans = c; 
+            if(c > ans[0]){
+                ans[0] = c; 
             }
+            ans[1] += c;
         }
-        this.avg_len = ans;
-        return this.avg_len;
-    }
-
-    public double calculatePerimetr(){
-        if(this.perimetr != 0){
-            return this.perimetr;
-        }
-        double perimetr = 0;
-        for(int i=0;i<this.points.size(); ++i){
-            if(i == this.points.size()-1){
-                perimetr += this.points.get(i).getDistanceToOtherPoint(this.points.get(0));
-            }
-            else{
-                perimetr += this.points.get(i).getDistanceToOtherPoint(this.points.get(i+1));
-            }
-        }
-        this.perimetr = perimetr;
-        return this.perimetr;
-    }
-
-    public double getAverageSide(){
-        if(this.perimetr != 0){
-            return this.perimetr/this.points.size();
-        }
-        return this.calculatePerimetr()/this.points.size();
+        return ans;
     }
 
 }
