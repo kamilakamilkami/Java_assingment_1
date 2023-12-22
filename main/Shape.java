@@ -33,7 +33,8 @@ public class Shape {
                 ans = c; 
             }
         }
-        return ans;
+        this.avg_len = ans;
+        return this.avg_len;
     }
 
     public double calculatePerimetr(){
@@ -49,7 +50,8 @@ public class Shape {
                 perimetr += this.points.get(i).getDistanceToOtherPoint(this.points.get(i+1));
             }
         }
-        return perimetr;
+        this.perimetr = perimetr;
+        return this.perimetr;
     }
 
     public double getAverageSide(){
